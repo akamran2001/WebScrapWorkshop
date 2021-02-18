@@ -35,21 +35,19 @@ prices = new_releases.xpath('.//div[@class="discount_final_price"]/text()')
 
 # Get game tags
 tags_divs = new_releases.xpath('.//div[@class="tab_item_top_tags"]')
-tags = [div.text_content() for div in tags_divs]
+tags = [div.text_content().split() for div in tags_divs]
 
 # Get platform names for each game
 platforms = []
 tab_item_details = new_releases.xpath('.//div[@class="tab_item_details"]')
-spans = []
-for tab in tab_item_details:
-    spans.append(tab.xpath('.//span'))
+spans = [tab.xpath('.//span') for tab in tab_item_details]
 for span in spans:
     plat = []
     for tag in span:
-        class_name = tag.classes._attributes['class'][13:]
-        if len(class_name) > 0:
-            plat.append(class_name)
-    platforms.append(",".join(plat))
+        class_name = tag.classes._attributes['class'].split(" ")
+        if len(class_name) == 2:
+            plat.append(class_name[1])
+    platforms.append(plat)
 
 # Store output in a list of dictionaries
 output = []
