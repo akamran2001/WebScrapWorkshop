@@ -40,11 +40,11 @@ tags = [div.text_content().split() for div in tags_divs]
 # Get platform names for each game
 platforms = []
 tab_item_details = new_releases.xpath('.//div[@class="tab_item_details"]')
-spans = [tab.xpath('.//span') for tab in tab_item_details]
-for span in spans:
+span_list = [tab.xpath('.//span') for tab in tab_item_details]
+for spans in span_list:
     plat = []
-    for tag in span:
-        class_name = tag.classes._attributes['class'].split(" ")
+    for span in spans:
+        class_name = span.classes._attributes['class'].split(" ")
         if len(class_name) == 2:
             plat.append(class_name[1])
     platforms.append(plat)
