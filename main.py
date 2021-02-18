@@ -62,5 +62,5 @@ for title, price, tag, platform in zip(titles, prices, tags, platforms):
     output.append(resp)
 
 # Dump list of dictionaries to a JSON file
-with open('result.json', 'w') as fp:
+with open('results.json', 'w') as fp:
     json.dump(output, fp)
